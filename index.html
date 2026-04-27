@@ -1,382 +1,442 @@
-<!DOCTYPE HTML>
-<!--
-	Dimension by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Steven's Portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Steven Nguyen</title>
+<meta name="description" content="Steven Nguyen — Python dev. AI and data stuff." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f0e;
+    --bg-2: #131614;
+    --ink: #e8e6df;
+    --ink-dim: #8a8a82;
+    --line: #2a2d2a;
+    --accent: #c8ff5a;
+    --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    --serif: 'Fraunces', Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 48px 32px 96px;
+    position: relative;
+    z-index: 1;
+  }
+  header {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 28px;
+    margin-bottom: 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .meta-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: var(--ink-dim);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .status { display: inline-flex; align-items: center; gap: 8px; }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(40px, 7vw, 76px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+  }
+  .tagline {
+    color: var(--ink-dim);
+    font-size: 14px;
+    max-width: 60ch;
+    margin-top: 8px;
+  }
+  .tagline strong { color: var(--ink); font-weight: 500; }
+  section { margin-top: 72px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 32px;
+    border-bottom: 1px dashed var(--line);
+    padding-bottom: 12px;
+  }
+  .section-num {
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+  }
+  .about {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.5;
+    max-width: 64ch;
+    color: var(--ink);
+  }
+  .projects { display: flex; flex-direction: column; gap: 32px; }
+  .project {
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    padding: 28px;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+  }
+  .project::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 18px; height: 18px;
+    border-top: 2px solid var(--ink-dim);
+    border-left: 2px solid var(--ink-dim);
+    transition: border-color 0.2s;
+  }
+  .project::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 18px; height: 18px;
+    border-bottom: 2px solid var(--ink-dim);
+    border-right: 2px solid var(--ink-dim);
+    transition: border-color 0.2s;
+  }
+  .project:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .project:hover::before, .project:hover::after { border-color: var(--accent); }
+  .project.flagship {
+    border-color: var(--accent);
+    background: linear-gradient(180deg, rgba(200,255,90,0.03) 0%, var(--bg-2) 100%);
+  }
+  .project-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .project-title {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .project-title .arrow {
+    color: var(--ink-dim);
+    transition: color 0.2s, transform 0.2s;
+    display: inline-block;
+    margin-left: 4px;
+  }
+  .project:hover .arrow {
+    color: var(--accent);
+    transform: translate(4px, -4px);
+  }
+  .project-tag {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 10px;
+    background: rgba(200,255,90,0.05);
+  }
+  .project-blurb {
+    color: var(--ink-dim);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 18px;
+    max-width: 70ch;
+  }
+  .project-blurb strong { color: var(--ink); font-weight: 500; }
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 12px;
+  }
+  .stack span {
+    color: var(--ink-dim);
+    border: 1px solid var(--line);
+    padding: 3px 9px;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    border: 1px solid var(--line);
+    padding: 24px;
+    background: var(--bg-2);
+  }
+  .skills-col h3 {
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .skills-col ul { list-style: none; font-size: 13px; }
+  .skills-col li { padding: 4px 0; color: var(--ink); }
+  .skills-col li::before { content: "› "; color: var(--ink-dim); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .contact-card {
+    border: 1px solid var(--line);
+    padding: 20px;
+    background: var(--bg-2);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .contact-card:hover {
+    border-color: var(--accent);
+    background: rgba(200,255,90,0.03);
+  }
+  .contact-card .lbl {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-bottom: 6px;
+  }
+  .contact-card .val {
+    font-size: 15px;
+    color: var(--ink);
+    word-break: break-all;
+  }
+  .contact-card:hover .val { color: var(--accent); }
+  footer {
+    margin-top: 96px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-dim);
+    font-size: 12px;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: reveal 0.7s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .reveal.d1 { animation-delay: 0.1s; }
+  .reveal.d2 { animation-delay: 0.25s; }
+  @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 600px) {
+    .wrap { padding: 28px 18px 64px; }
+    .about { font-size: 18px; }
+    .project { padding: 22px; }
+    .project-title { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+    <header>
+      <div class="meta-row reveal">
+        <span class="status"><span class="dot"></span>OPEN TO WORK</span>
+      </div>
+      <h1 class="reveal d1">Steven Nguyen</h1>
+      <p class="tagline reveal d2">
+        Python dev. Currently building <strong>Aveltura</strong> — an AI that runs on scraped, messy real-world data.
+      </p>
+    </header>
 
-				<!-- Header -->
-					<header id="header">
-						<div class="logo">
-							<span class="icon fa-gem"></span>
-						</div>
-						<div class="content">
-							<div class="inner">
-								<h1>My Portfolio</h1>
-								<p>A collection of my projects for whoever wants to see.</p>
-							</div>
-						</div>
-						<nav>
-							<ul>
-								<li><a href="#intro">Intro</a></li>
-								<li><a href="#work">Work</a></li>
-								<li><a href="#about">About</a></li>
-								<li><a href="#contact">Contact</a></li>
-								<!--<li><a href="#elements">Elements</a></li>-->
-							</ul>
-						</nav>
-					</header>
+    <section id="about">
+      <div class="section-head">
+        <span class="section-num">01 /</span>
+        <h2>About</h2>
+      </div>
+      <p class="about">
+        I build AI that works on scraped, messy real-world data. The data goes through ingestion pipelines — a cleaner, a normalizer, scripts that pull it all together — and gets fed into a RAG interface so the AI is actually user-accessible.
+        <br><br>
+        BS in Integrated Science &amp; Technology (Applied Computing), James Madison.
+      </p>
+    </section>
 
-				<!-- Main -->
-					<div id="main">
+    <section id="work">
+      <div class="section-head">
+        <span class="section-num">02 /</span>
+        <h2>Work</h2>
+      </div>
 
-						<!-- Intro -->
-							<article id="intro">
-								<h2 class="major">Intro</h2>
-								<span class="image main"><img src="images/pic01.jpg" alt="" /></span>
-								<p>Hey, my name is Steven. I like programming because it's fun to make random stuff and flesh out an idea from paper into a feasable piece of software.</p>
-								<!--<p>Please send me an e-mail at the bottom of the main page if you see something that I could improve on or if you would like to contact me!</p>-->
-							</article>
+      <div class="projects">
 
-						<!-- Work -->
-							<article id="work">
-								<h2 class="major">Work</h2>
-								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-								<p>
-									<ul>
-										<!--<li><a href="https://github.com/steviehp/Simple-Shooting-Range/blob/main/Narritive%20Assignment.docx">Narrative Assignment For Benton</a></li>-->
-										<li><a href="https://github.com/steviehp/VG-VRT">VG-VRT</a></li>
-										<!--<li><a href="https://dukesjmuedu-my.sharepoint.com/:u:/g/personal/nguyensp_dukes_jmu_edu/EaSZLUeIlTdJj3yytkVFJokBAjcz8oNNug96xx9siPqqDg?e=9JHnSc">Shooting Range</a></li>-->
-										<li><a href="https://github.com/steviehp/449-Assignments">Jupyter Notebook Files</a></li>
-										<li><a href="https://steviehp.github.io/aveltura/">Aveltura - Future Mathematical Optimizer</a></li>
-									</ul>
-									</ul>
-								</p>
-							</article>
+        <a href="https://github.com/steviehp/aveltura" class="project flagship" target="_blank" rel="noopener">
+          <div class="project-head">
+            <div class="project-title">Aveltura — Vel <span class="arrow">↗</span></div>
+            <span class="project-tag">Active</span>
+          </div>
+          <p class="project-blurb">
+            An AI that runs on scraped messy data. I built ingestion pipelines (cleaner, normalizer, scrapers) that feed into a RAG interface so the AI is user-accessible. It rebuilds itself nightly — scrape, discover new entries, clean, re-index. Comes with Velframe, a Textual TUI for running the whole stack over SSH.
+            <br><br>
+            First dataset is performance engine specs (JDM, American, European). Same pipeline works on anything with measurable variables.
+          </p>
+          <div class="stack">
+            <span>Python</span><span>LlamaIndex</span><span>Mistral 7B</span><span>Ollama</span><span>FastAPI</span><span>Open WebUI</span><span>Textual</span><span>Docker</span>
+          </div>
+        </a>
 
-						<!-- About -->
-							<article id="about">
-								<h2 class="major">About</h2>
-								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
-								<p>Hey I'm Steven, I'm a Python programmer who specializes in Data Science, specifically in Machine Learning.</p>
-								<p>I graduated from James Madison University with a Bachelors in Integrated Science and Technology or ISAT for short.</p>
-								<p>My major is broken up into multiple sectors such as Applied Computing, Applied Biotechnology, Energy, Production Systems and Environment</p>
-								<p>I myself have focused in Applied Computing which involves full stack development and data science.</p>
-								<p>I have experience programming in Python, C#, Javascript, HTML and SQL.</p>
-								<p>I made this website to keep track of my projects and to keep everything organized, this way I'd be able to look through my previos projects easier,I firmly believe being organized in programming is necessary.</p>
-							</article>
+        <a href="https://github.com/steviehp/VG-VRT" class="project" target="_blank" rel="noopener">
+          <div class="project-head">
+            <div class="project-title">VG-VRT <span class="arrow">↗</span></div>
+            <span class="project-tag">VR · Senior Capstone</span>
+          </div>
+          <p class="project-blurb">
+            Senior capstone (3-person team, JMU ISAT 2022). A VR-based alternative to traditional vestibular rehab therapy — basically a game-ified version of the dizziness rehab exercises people with inner-ear balance disorders have to do. Standard VRT is monotonous, and because it's designed to provoke symptoms, patients quit early. So we built three games on Oculus Quest 2 that mirror the prescribed movements (eye tracking, bending to pick up objects, following objects between hands) inside an immersive environment.
+            <br><br>
+            The games log patient performance and feed it into a difficulty-prediction layer that scales the next session up or down automatically — therapy that actually adapts instead of staying flat. Built pre-Meta, presented at the ISAT Senior Symposium.
+            <br><br>
+            <span style="color:var(--accent)">→ Capstone presentation:</span> <a href="https://www.youtube.com/watch?v=OqfnmdkuqpI" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline;" onclick="event.stopPropagation();">youtube.com/watch?v=OqfnmdkuqpI</a>
+          </p>
+          <div class="stack">
+            <span>C#</span><span>Unity</span><span>Oculus SDK</span><span>VR</span><span>Adaptive systems</span>
+          </div>
+        </a>
 
-						<!-- Contact -->
-							<article id="contact">
-								<h2 class="major">Contact</h2>
-								<!--<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<label for="name">Name</label>
-											<input type="text" name="name" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="4"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</form>-->
-								<h2>Contact Me!</h2>
-								<br>
-								<p>
-									<ul>
-										<li>Email: nguyen.steven909@gmail.com</li>
-										<li>LinkedIn: <a href="https://www.linkedin.com/in/steviehp">www.linkedin.com/in/steviehp</a></li>
-									</ul>
-								</p>
-								<ul class="icons">
-									<!--<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>-->
-									<!--<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>-->
-									<li><a href="https://linkedin.com/in/steviehp" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-									<li><a href="https://github.com/steviehp" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</article>
+        <a href="https://github.com/steviehp/449-Assignments" class="project" target="_blank" rel="noopener">
+          <div class="project-head">
+            <div class="project-title">Deep Neural Networks — ISAT 449 <span class="arrow">↗</span></div>
+            <span class="project-tag">Coursework</span>
+          </div>
+          <p class="project-blurb">
+            Hands-on DNN coursework in Jupyter. Implementing and training models from scratch. The ML fundamentals that fed into how I built Aveltura.
+          </p>
+          <div class="stack">
+            <span>Python</span><span>Jupyter</span><span>NumPy</span>
+          </div>
+        </a>
+      </div>
+    </section>
 
-						<!-- Elements -->
-							<article id="elements">
-								<h2 class="major">Elements</h2>
+    <section id="stack">
+      <div class="section-head">
+        <span class="section-num">03 /</span>
+        <h2>Stack</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skills-col">
+          <h3>Languages</h3>
+          <ul>
+            <li>Python</li>
+            <li>C#</li>
+            <li>JavaScript</li>
+            <li>SQL</li>
+            <li>HTML / CSS</li>
+          </ul>
+        </div>
+        <div class="skills-col">
+          <h3>AI / ML</h3>
+          <ul>
+            <li>RAG pipelines</li>
+            <li>LlamaIndex</li>
+            <li>Ollama / local LLMs</li>
+            <li>Mistral, Llama family</li>
+            <li>Vector indexing</li>
+          </ul>
+        </div>
+        <div class="skills-col">
+          <h3>Backend / Infra</h3>
+          <ul>
+            <li>FastAPI / uvicorn</li>
+            <li>Docker / Compose</li>
+            <li>Linux</li>
+            <li>SSH / remote ops</li>
+            <li>Tailscale</li>
+          </ul>
+        </div>
+        <div class="skills-col">
+          <h3>Data</h3>
+          <ul>
+            <li>Web scraping</li>
+            <li>Cleaners / normalizers</li>
+            <li>CSV / JSON pipelines</li>
+            <li>SQL</li>
+            <li>Pandas</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-								<section>
-									<h3 class="major">Text</h3>
-									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-									<hr />
-									<h2>Heading Level 2</h2>
-									<h3>Heading Level 3</h3>
-									<h4>Heading Level 4</h4>
-									<h5>Heading Level 5</h5>
-									<h6>Heading Level 6</h6>
-									<hr />
-									<h4>Blockquote</h4>
-									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-									<h4>Preformatted</h4>
-									<pre><code>i = 0;
+    <section id="contact">
+      <div class="section-head">
+        <span class="section-num">04 /</span>
+        <h2>Contact</h2>
+      </div>
+      <div class="contact-grid">
+        <a class="contact-card" href="mailto:ngsteve909@proton.me">
+          <div class="lbl">Email</div>
+          <div class="val">ngsteve909@proton.me</div>
+        </a>
+        <a class="contact-card" href="https://github.com/steviehp" target="_blank" rel="noopener">
+          <div class="lbl">GitHub</div>
+          <div class="val">github.com/steviehp</div>
+        </a>
+      </div>
+    </section>
 
-while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
-}
+    <footer>
+      <span>© 2026 Steven Nguyen</span>
+    </footer>
 
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-								</section>
-
-								<section>
-									<h3 class="major">Lists</h3>
-
-									<h4>Unordered</h4>
-									<ul>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Alternate</h4>
-									<ul class="alt">
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Ordered</h4>
-									<ol>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis viverra.</li>
-										<li>Felis enim feugiat.</li>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis lorem.</li>
-										<li>Felis enim et feugiat.</li>
-									</ol>
-									<h4>Icons</h4>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-									</ul>
-
-									<h4>Actions</h4>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-								</section>
-
-								<section>
-									<h3 class="major">Table</h3>
-									<h4>Default</h4>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-
-									<h4>Alternate</h4>
-									<div class="table-wrapper">
-										<table class="alt">
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-								</section>
-
-								<section>
-									<h3 class="major">Buttons</h3>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Primary</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button">Default</a></li>
-										<li><a href="#" class="button small">Small</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-										<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-									</ul>
-									<ul class="actions">
-										<li><span class="button primary disabled">Disabled</span></li>
-										<li><span class="button disabled">Disabled</span></li>
-									</ul>
-								</section>
-
-								<section>
-									<h3 class="major">Form</h3>
-									<form method="post" action="#">
-										<div class="fields">
-											<div class="field half">
-												<label for="demo-name">Name</label>
-												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
-											</div>
-											<div class="field half">
-												<label for="demo-email">Email</label>
-												<input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
-											</div>
-											<div class="field">
-												<label for="demo-category">Category</label>
-												<select name="demo-category" id="demo-category">
-													<option value="">-</option>
-													<option value="1">Manufacturing</option>
-													<option value="1">Shipping</option>
-													<option value="1">Administration</option>
-													<option value="1">Human Resources</option>
-												</select>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-												<label for="demo-priority-low">Low</label>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-high" name="demo-priority">
-												<label for="demo-priority-high">High</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-copy" name="demo-copy">
-												<label for="demo-copy">Email me a copy</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-human" name="demo-human" checked>
-												<label for="demo-human">Not a robot</label>
-											</div>
-											<div class="field">
-												<label for="demo-message">Message</label>
-												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-											</div>
-										</div>
-										<ul class="actions">
-											<li><input type="submit" value="Send Message" class="primary" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</form>
-								</section>
-
-							</article>
-
-					</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<p class="copyright">&copy; My E-mail: <a href="steviehp.github.io">nguyen.steven909@gmail.com</a>.</p>
-					</footer>
-
-			</div>
-
-		<!-- BG -->
-			<div id="bg"></div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+  </div>
+</body>
 </html>
